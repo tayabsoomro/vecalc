@@ -55,6 +55,18 @@ void usage( void ) {
     puts( "  a <value> - extend vector by additional value" );
 }
 
+// is_vec_null:
+//  Checks if the vector passed in as param NULL or not
+// In:
+//  Vector != NULL
+// Out:
+//  Return -- true if v is NULL, false otherwise
+bool is_vec_null(Vector *v){
+  if(v == NULL) return true;
+  return false;
+}
+
+
 // print_vec:
 // 	Prints the vector provided in param
 // In:
@@ -75,6 +87,7 @@ void print_vec(Vector *v){
 // 	effect -- A new Vector is allocted to dynamic memory space.
 Vector *alloc_vec(void){
 	Vector *v = new Vector;
+  v->size = 0;
 	return v;
 }
 
@@ -86,8 +99,10 @@ Vector *alloc_vec(void){
 // 	No return value
 // 	effect -- Vector passed through param is safely deallocated from memory space.
 void dealloc_vec(Vector *v){
-	delete [] v->elements;
-	delete v;	
+	if(v != NULL){
+    delete [] v->elements;
+  	delete v;	
+  }
 }
 
 // extend_vec:
@@ -99,7 +114,24 @@ void dealloc_vec(Vector *v){
 // 	return  -- Vector including the new Elem value
 //	effect -- Deallocates the given Vector and creates a new one with new Elem value added.
 Vector *extend_vec(Vector *v,Elem value){
-	return NULL;
+	if(!is_vec_null(v)){
+    if(v->elements != NULL){
+      uint8_t size = v->size;
+
+      Vector *new_vector = alloc_vec();
+      uint8_t newsize = v->size+1;
+      new_vector->elements = new Elem[newsize];
+
+      for(uint8_t i = 0; i < size; i++){
+        new_vector->elements[i] = v->elements[i];
+      }
+      new_vector->elements[size] = value;
+      
+      dealloc_vec(v);
+      return new_vector;
+    }
+  }
+  return NULL;
 }
 
 // scalar_plus:
@@ -150,17 +182,6 @@ Vector *scalar_mult(Vector *v, Elem value){
 // 	effect -- All elements in Vector get updated with new values.
 Vector *scalar_divide(Vector *v, Elem value){
         return NULL;
-}
-
-// is_vec_null:
-//  Checks if the vector passed in as param NULL or not
-// In:
-//  Vector != NULL
-// Out:
-//  Return -- true if v is NULL, false otherwise
-bool is_vec_null(Vector *v){
-  if(v == NULL) return true;
-  return false;
 }
 
 // main: 
