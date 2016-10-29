@@ -1,6 +1,6 @@
 // Author: Muhammad Tayab Soomro
 // Student #: 11199539
-// Description: vcalc program created for Assignment 2 for the CMPT-214
+// Description: vecalc program created for Assignment 2 for the CMPT-214
 // Created On: Tuesday 25th October, 2016.
 // Finished On: ---
 
