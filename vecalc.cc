@@ -126,7 +126,7 @@ Vector *scalar_plus(Vector *v, Elem value){
 Vector *scalar_minus(Vector *v, Elem value){
         return NULL;
 }
-;
+
 
 // scalar_multiply:
 // 	Multiplies the specified Elem value from each element in Vector
@@ -152,6 +152,16 @@ Vector *scalar_divide(Vector *v, Elem value){
         return NULL;
 }
 
+// is_vec_null:
+//  Checks if the vector passed in as param NULL or not
+// In:
+//  Vector != NULL
+// Out:
+//  Return -- true if v is NULL, false otherwise
+bool is_vec_null(Vector *v){
+  if(v == NULL) return true;
+  return false;
+}
 
 // main: 
 // 	Program entry point
@@ -167,6 +177,9 @@ int main(int argc, char* argv[]){
 	
 	// New Vector
 	Vector *v;
+  
+  // Testing is_vec_null
+  assert(true == is_vec_null(v));
 
 	// Checking alloc_vec:
 	v = alloc_vec();
