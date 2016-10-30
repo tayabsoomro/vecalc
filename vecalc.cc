@@ -75,7 +75,7 @@ bool is_vec_null(Vector *v){
 // 	No return value
 // 	effect -- Vector is printed on the stdin
 void print_vec(Vector *v){
-	puts("FAILURE: Vector did not print");
+  puts("FAILURE: Did not print vector");
 }
 
 // alloc_vec:
@@ -220,7 +220,7 @@ int main(int argc, char* argv[]){
   // Checking scalar_plus:
   assert(NULL != scalar_plus(v,2.0));	
   v = scalar_plus(v,2.0);
-  
+
   // Checking scalar_minus:
 	assert(NULL != scalar_minus(v,2.0)); 
   v = scalar_minus(v,2.0);
