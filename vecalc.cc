@@ -117,16 +117,15 @@ void dealloc_vec(Vector *v){
 Vector *extend_vec(Vector *v,Elem value){
 	if(!is_vec_null(v)){
       uint8_t size = v->size;
-
       Vector *new_vector = alloc_vec();
-      uint8_t newsize = v->size+1;
+      uint8_t newsize = size+1;
+      new_vector->size = newsize; 
       new_vector->elements = new Elem[newsize];
 
       for(uint8_t i = 0; i < size; i++){
         new_vector->elements[i] = v->elements[i];
       }
       new_vector->elements[size] = value;
-      
       dealloc_vec(v);
       return new_vector;
   }
@@ -142,7 +141,16 @@ Vector *extend_vec(Vector *v,Elem value){
 // 	return -- Vector with updated values, NULL otherwise
 // 	effect -- All elements in Vector get updated with new values if successfull.
 Vector *scalar_plus(Vector *v, Elem value){
-        return NULL;
+  if(!is_vec_null(v)){
+    if(v->size > 0){ // don't add to an empty vector
+      uint8_t size = v->size;
+      for(int i = 0; i < size; i++){
+        v->elements[i] += value;
+      }
+      return v;
+    }
+  }
+  return NULL;
 }
 // scalar_minus:
 // 	Subtracts the specified Elem value from each element in Vector
@@ -206,19 +214,24 @@ int main(int argc, char* argv[]){
 	//assert(NULL != v);
 	
 	// Checking extend_vec
-	assert(NULL != extend_vec(v, 1.0));
-
-	// Checking scalar_plus:
-	assert(NULL != scalar_plus(v,2.0));
-
-	// Checking scalar_minus:
-	assert(NULL != scalar_minus(v,2.0));
-
-	// Checking scalar_multiply:
+	assert(NULL != extend_vec(v,1.0));
+  v = extend_vec(v,1.0);
+	
+  // Checking scalar_plus:
+  assert(NULL != scalar_plus(v,2.0));	
+  v = scalar_plus(v,2.0);
+  
+  // Checking scalar_minus:
+	assert(NULL != scalar_minus(v,2.0)); 
+  v = scalar_minus(v,2.0);
+	
+  // Checking scalar_multiply:
 	assert(NULL != scalar_mult(v,2.0));
+  v = scalar_mult(v,2.0);
 
 	// Checking scalar_divide:
 	assert(NULL != scalar_divide(v,2.0));
+  v = scalar_divide(v,2.0);
 	
 	// Checking print_vec:
 	// Expected output value: 1.0
