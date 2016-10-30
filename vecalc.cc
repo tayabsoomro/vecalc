@@ -116,7 +116,6 @@ void dealloc_vec(Vector *v){
 //	effect -- Deallocates the given Vector and creates a new one with new Elem value added.
 Vector *extend_vec(Vector *v,Elem value){
 	if(!is_vec_null(v)){
-    if(v->elements != NULL){
       uint8_t size = v->size;
 
       Vector *new_vector = alloc_vec();
@@ -130,7 +129,6 @@ Vector *extend_vec(Vector *v,Elem value){
       
       dealloc_vec(v);
       return new_vector;
-    }
   }
   return NULL;
 }
