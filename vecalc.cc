@@ -88,6 +88,7 @@ void print_vec(Vector *v){
 Vector *alloc_vec(void){
 	Vector *v = new Vector;
   v->size = 0;
+  v->elements = NULL;
 	return v;
 }
 
@@ -197,7 +198,7 @@ int main(int argc, char* argv[]){
 #ifdef TESTING
 	
 	// New Vector
-	Vector *v;
+	Vector *v = NULL;
   
   // Testing is_vec_null
   assert(true == is_vec_null(v));
