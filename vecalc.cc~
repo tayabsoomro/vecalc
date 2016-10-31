@@ -29,7 +29,7 @@ typedef float Elem;
 
 // A Vector is a structured type of vectors.
 typedef struct {
-	uint8_t size;
+	uint16_t size;
 	Elem *elements;
 } Vector;
 
@@ -72,10 +72,17 @@ bool is_vec_null(Vector *v){
 // In:
 // 	Vector != NULL
 // Out:
-// 	No return value
+// 	Return -- true if successful, false otherwise
 // 	effect -- Vector is printed on the stdin
-void print_vec(Vector *v){
-  puts("FAILURE: Did not print vector");
+bool print_vec(Vector *v){
+  if(!is_vec_null(v) || NULL != v->elements || 0 < v->size){
+  	uint16_t size = v->size;
+	for(uint16_t i = 0; i < size; i++){
+		printf("%f ", v->elements[i]);
+	}
+	return true;
+  }
+  return false;
 }
 
 // alloc_vec:
@@ -88,7 +95,7 @@ void print_vec(Vector *v){
 Vector *alloc_vec(void){
 	Vector *v = new Vector;
   v->size = 0;
-  v->elements = NULL;
+  v->elements = new Elem[v->size];
 	return v;
 }
 
@@ -143,7 +150,7 @@ Vector *extend_vec(Vector *v,Elem value){
 Vector *scalar_plus(Vector *v, Elem value){
   if(!is_vec_null(v)){
     if(v->size > 0){ // don't add to an empty vector
-      uint8_t size = v->size;
+      uint16_t size = v->size;
       for(int i = 0; i < size; i++){
         v->elements[i] += value;
       }
@@ -160,7 +167,7 @@ Vector *scalar_plus(Vector *v, Elem value){
 // 	Elem
 // Out:
 //
-// 	return -- Vector with updated values, NULL otherwise
+// 	return -- Vec://www.facebook.com/l.php?u=http%3A%2F%2Fwww.nserc-crsng.gc.ca%2FStudents-Etudiants%2FUG-PC%2FUSRA-BRPC_eng.asp%23apply&h=CAQG4uK6qtor with updated values, NULL otherwise
 // 	effect -- All elements in Vector get updated with new values if successful
 Vector *scalar_minus(Vector *v, Elem value){
         return NULL;
@@ -179,7 +186,7 @@ Vector *scalar_mult(Vector *v, Elem value){
         return NULL;
 }
 
-// scalar_divide:
+s_vec_null(v)// scalar_divide:
 // 	Divides the specified Elem value from each element in Vector
 // In:
 // 	Vector != NULL
@@ -194,7 +201,7 @@ Vector *scalar_divide(Vector *v, Elem value){
 // main: 
 // 	Program entry point
 // In:
-// 	argc > 0
+// 	argc > 0 new Elem[newsize];
 // 	argv[0 .. argc-1] != NULL
 // Out:
 // 	return -- EXIT_SUCCESS if program terminates normally,
@@ -206,32 +213,33 @@ int main(int argc, char* argv[]){
 	// New Vector
 	Vector *v = NULL;
   
-  // Testing is_vec_null
-  assert(true == is_vec_null(v));
+  	// Testing is_vec_null
+  	assert(true == is_vec_null(v));
 
 	// Checking alloc_vec:
 	v = alloc_vec();
 	//assert(NULL != v);
 	
 	// Checking extend_vec
-	assert(NULL != extend_vec(v,1.0));
-  v = extend_vec(v,1.0);
+  	v = extend_vec(v,1.0);	
+	assert(NULL != v);
 	
-  // Checking scalar_plus:
-  assert(NULL != scalar_plus(v,2.0));	
-  v = scalar_plus(v,2.0);
+  	// Checking scalar_plus:
+  	assert(NULL != scalar_plus(v,2.0));	
+	
+	// Checking print_vec:
+	// Expected output:
+	// 3.0
+	print_vec(v);
 
-  // Checking scalar_minus:
+  	// Checking scalar_minus:
 	assert(NULL != scalar_minus(v,2.0)); 
-  v = scalar_minus(v,2.0);
 	
-  // Checking scalar_multiply:
+  	// Checking scalar_multiply:
 	assert(NULL != scalar_mult(v,2.0));
-  v = scalar_mult(v,2.0);
 
 	// Checking scalar_divide:
 	assert(NULL != scalar_divide(v,2.0));
-  v = scalar_divide(v,2.0);
 	
 	// Checking print_vec:
 	// Expected output value: 1.0
