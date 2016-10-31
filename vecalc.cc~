@@ -72,17 +72,10 @@ bool is_vec_null(Vector *v){
 // In:
 // 	Vector != NULL
 // Out:
-// 	Return -- true if successful, false otherwise
+// 	No return value
 // 	effect -- Vector is printed on the stdin
-bool print_vec(Vector *v){
-  if(!is_vec_null(v)){
-  	uint8_t size = v->size;
-	for(uint8_t i = 0; i < size; i++){
-		printf("%i ", v->elements[i);
-	}
-	return true;
-  }
-  return false;
+void print_vec(Vector *v){
+  puts("FAILURE: Did not print vector");
 }
 
 // alloc_vec:
