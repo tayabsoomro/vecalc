@@ -1,5 +1,8 @@
 // Author: Muhammad Tayab Soomro
 // Student #: 11199539
+// NSID: mts066
+// Email: tayab.soomro@usask.ca
+// GitHub: https://github.com/tayabsoomro/
 // Description: vecalc program created for Assignment 2 for the CMPT-214
 // Created On: Tuesday 25th October, 2016.
 // Finished On: ---
