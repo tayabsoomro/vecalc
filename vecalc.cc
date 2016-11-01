@@ -113,8 +113,10 @@ bool print_vec(Vector *v){
 Vector *alloc_vec(void){
     // allocate the vector
     Vector *v = new Vector;
-    v->size = 0;
-    v->elements = new Elem[v->size];
+    if(v != NULL){
+      v->size = 0;
+      v->elements = NULL;
+    }
     return v;
 }
 
@@ -142,19 +144,29 @@ void dealloc_vec(Vector *v){
 //	effect -- Deallocates the given Vector and creates a new one with new Elem value added.
 Vector *extend_vec(Vector *v,Elem value){
     if(!is_vec_null(v)){
-       if(MAX_ELEMS <= v->size) return NULL; 
-        VecSize size = v->size;
+        if(MAX_ELEMS == v->size) return NULL; 
+        /*else if(0 == v->size) {
+          Vector *new_vector = alloc_vec();
+          new_vector->elements = new Elem[1];
+          new_vector->elements[0] = value;
+          new_vector->size++;
+          return new_vector;
+        }*/
+        else{
+          VecSize orig_size = v->size;
 
-        Vector *new_vector = alloc_vec();
-        VecSize newsize = size+1;
-        new_vector->size = newsize; 
-        new_vector->elements = new Elem[newsize];
+          Vector *new_vector = alloc_vec();
+          VecSize new_size = orig_size+1;
 
-        for(VecSize i = 0; i < size; i++){
+          new_vector->size = new_size;
+          new_vector->elements = new Elem[new_size];
+          
+          for(VecSize i = 0; i < orig_size; i++){
             new_vector->elements[i] = v->elements[i];
-        }
-        new_vector->elements[size] = value;
-        return new_vector;
+          }
+          new_vector->elements[orig_size] = value;
+          return new_vector;
+        }    
     }
     return NULL;
 }
@@ -187,7 +199,7 @@ Vector *scalar_plus(Vector *v, Elem value){
 // 	Elem
 // Out:
 //
-// 	return -- Vec://www.facebook.com/l.php?u=http%3A%2F%2Fwww.nserc-crsng.gc.ca%2FStudents-Etudiants%2FUG-PC%2FUSRA-BRPC_eng.asp%23apply&h=CAQG4uK6qtor with updated values, NULL otherwise
+// 	return -- Vector with updated values, NULL otherwise
 // 	effect -- All elemtj5e.jpgments in Vector get updated with new values if successful
 Vector *scalar_minus(Vector *v, Elem value){
     return NULL;
@@ -233,43 +245,69 @@ int main(int argc, char* argv[]){
     // New Vector
     Vector *v1 = NULL, *v2 = NULL, *v3 = NULL, *v4 = NULL;
   
-    // Testing is_vec_null
-    assert(true == is_vec_null(v1) && true == is_vec_null(v2) && true == is_vec_null(v3) && is_vec_null(v4));
+    // Testing is_vec_null for true
+    assert(is_vec_null(v1) && is_vec_null(v2) && is_vec_null(v3) && is_vec_null(v4));
+    
+
 
     // Checking alloc_vec:
     v1 = alloc_vec();
     assert(NULL != v1);
+    assert(NULL == v1->elements);
+    assert(0 == v1->size);
+
+    v2 = alloc_vec();
+    assert(NULL != v2);
+    assert(NULL == v2->elements);
+    assert(0 == v2->size);
+
+    v3 = alloc_vec();
+    assert(NULL != v3);
+    assert(NULL == v3->elements);
+    assert(0 == v2->size);
+
+    v4 = alloc_vec();
+    assert(NULL != v4);
+    assert(NULL == v4->elements);
+    assert(0 == v4->size);
+
+    // Testing is_vec_null for false
+    assert(!is_vec_null(v1) && !is_vec_null(v2) && !is_vec_null(v3) && !is_vec_null(v4));
+
 	
     // Checking extend_vec
     
-    v2 = extend_vec(v1,1.0);
+    assert(NULL == extend_vec(NULL,1.0));
+
+    v2 = extend_vec(v1,100.0);
     assert(NULL != v2);
-    assert(1.0 == v2->elements[0]);
+    assert(1 == v2->size);
+    assert(100.0 == v2->elements[0]);
     
     dealloc_vec(v1);
 
-    assert(NULL == extend_vec(NULL,1.0));
-
-    v3 = extend_vec(v2,2.0);
+    v3 = extend_vec(v2,96.0);
     assert(NULL != v3);
-    assert(2.0 == v3->elements[1]);
+    assert(2 == v3->size);
+    assert(96.0 == v3->elements[1]);
 
     dealloc_vec(v2);
 
-    v4 = extend_vec(v3,3.0);
+    v4 = extend_vec(v3,12.0);
     assert(NULL != v4);
-    assert(3.0 == v4->elements[2]);
-
-    assert(3 == v4->size);    
-    
+    assert(3 == v4->size);
+    assert(12.0 == v4->elements[2]);
+   
+    dealloc_vec(v3);
 	
     // Checking scalar_plus:
     assert(NULL != scalar_plus(v4,2.0));	
     
-    assert(3.000000 == v4->elements[0]);
-    assert(4.000000 == v4->elements[1]);
-    assert(5.000000 == v4->elements[2]);
-        
+    assert(102.00000 == v4->elements[0]);
+    assert(98.000000 == v4->elements[1]);
+    assert(14.000000 == v4->elements[2]);
+    
+
     // Checking print_vec:
     // Expected output:
     // ** PRINT VECTOR BEGIN ***
@@ -277,11 +315,9 @@ int main(int argc, char* argv[]){
     // ** VECTOR SIZE: 3
     //
     // ** VECTOR ELEMENTS:
-    // 1: 3.000000
-    // 2: 4.000000
-    // 3: 5.000000
-    //
-    //
+    // 1. 102.000000
+    // 2. 98.000000
+    // 3. 14.000000
     // ** PRINT VECTOR END  **
     print_vec(v4);
 
@@ -298,4 +334,4 @@ int main(int argc, char* argv[]){
 #endif // TESTING
     return EXIT_SUCCESS;
 
-};
+}
