@@ -235,7 +235,6 @@ int main(int argc, char* argv[]){
   
     // Testing is_vec_null
     assert(true == is_vec_null(v1) && true == is_vec_null(v2) && true == is_vec_null(v3) && is_vec_null(v4));
-    assert(false == NULL);
 
     // Checking alloc_vec:
     v1 = alloc_vec();
