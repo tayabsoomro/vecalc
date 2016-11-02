@@ -1,0 +1,251 @@
+<h1>veCalc</h1>
+<hr />
+<p><em>Simple. Interactive. Vector Calculator</em></p>
+<hr />
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#introduction">Introduction</a>
+<ul><li><a href="#author">Author Info</a></li>
+<li><a href="#program">Program</a></li></ul></li>
+<li><a href="#compilation">Compilation</a></li>
+<li><a href="#project-progress">Project Progress</a></li>
+<li><a href="#code-structure">Code Structure</a>
+<ul><li><a href="#datatypes">Data Types</a></li>
+<li><a href="#constants">Constants</a></li>
+<li><a href="#functions">Functions</a></li></ul></li>
+</ul>
+
+<hr />
+<h2><a id="introduction">Introduction</a></h2>
+
+<ul>
+<li><h3><a id="author">Author</a></h3>
+
+<p>veCalc is a simple text-based vector calculator proudly created by Muhammad Tayab Soomro in CMPT 214 at the University of Saskatchewan. Tayab is a second-year computer science student, loves solving real-world problems with computer programs.
+Student #: 11199539 | NSID: mts066</p></li>
+<li><h3><a id="program">Program</a></h3>
+
+<p>The vecalc program operates on a retained vector of (single-precision) floating-point values. It alternates between two states, an input state and a calculation (or calculator) state. The program begins execution in the former state, wherein it creates an empty vector, prompts the user for a number of elements in the vector, and builds up a vector with elements obtained one-at-a-time from the user. The program then switches to calculation state. In calculation state vecalc accepts operations and commands from the user and executes them. After most commands the program remains in calculation state. On a "clear" command ("c"), the program frees up the memory used by the current vector (i.e. deletes that exiting vector) and switches back to input state.</p></li>
+</ul>
+<hr />
+<h2><a id="compilation">Compilation</a></h2>
+
+<p>The program can be compiled through following commands.
+  <br />
+  <code>g++ -Wall -Wextra -o vecalc vecalc.cc</code> - Outputs executable file named vecalc.
+  <br />
+  <code>g++ -Wall -Wextra -DTESTING -o vecalc.testing vecalc.cc</code> - Outputs executable file named vecalc.testing which runs the tests</p>
+
+<h2><a id="project-progress">Project Progress</a></h2>
+
+<ul>
+  <li>Implementation
+  <ul>
+    <li>Functions (<strong>5</strong>/8)
+    <ul>
+      <li>Completed:</li>
+      <ul>
+        <li><em><code>bool print_vec(Vector *)</code></em></li>
+        <li><em><code>Vector *alloc_vec(void)</code></em></li>
+        <li><em><code>void dealloc_vec(Vector *)</code></em></li>
+        <li><em><code>Vector *extend_vec(Vector *, Elem)</code></em></li>
+        <li><em><code>Vector *scalar_plus(Vector *, Elem)</code></em></li>
+      </ul>
+      <li>Incomplete</li>
+      <ul>
+        <li><em><code>Vector *scalar_minus(Vector *, Elem)</code></em></li>
+        <li><em><code>Vector *scalar_mult(Vector *, Elem)</code></em></li>
+        <li><em><code>Vector *scalar_div(Vector *, Elem)</code></em></li></ul></li></ul></li>
+      </ul>
+</ul>
+
+<h2><a id="code-structure">Code Structure</a></h2>
+
+<ul>
+  <li><h3><a id="datatypes">Datatypes</a></h3>
+
+    <ul>
+      <li><strong>Elem</strong> - Represents an element and is of type <code>float</code></li>
+
+    </ul>
+
+    <ul>
+      <li><strong>VecSize</strong> - Represents the size of a Vector</li>
+
+
+      <p><strong><em>Example Usage</em></strong>
+      <code><br />
+      // for(VecSize i = 0 ...){<br />
+      //   ...<br />
+      // }<br />
+      </code></p>
+    </ul>
+
+    <ul>
+      <li><strong>State</strong> - Representing program states <code>INPUT</code> and <code>CALC</code></li>
+
+      <p><strong><em>Example Usage</em></strong>
+      <code><br />
+      // ... (State s, ...){<br />
+      //      switch(s){<br />
+      //          case INPUT: ...; break;<br />
+      //      case CALC: ...; break;<br />
+      //      default: assert(false); break;<br />
+      //  }<br />
+      // }<br />
+      </code></p>
+    </ul>
+    <ul>
+      <li><strong>Vector</strong> - Represents a structured type of vectors</li>
+
+      <p><strong><em>Example Usage</em></strong>
+      <code><br />
+      // ... (Vector *v, uint8_t index, ...) {<br />
+      //   ... v-&gt;elements[index] ...<br />
+      // }<br />
+      </code></p>
+    </ul>
+</li>
+<li><h3><a id="constants">Constants</a></h3>
+
+<ul>
+  <li><strong>MAX<em>ELEMS</strong> - Represents the maximum number of elements that a Vector can hold (UINT16</em>MAX)</li>
+  <ul><li>This value was chosen because a vector can contain elements from 0 - 65535.</li></ul>
+</ul></li>
+<li><h3><a id="functions">Functions</a></h3>
+
+<ul><li><strong><em><code>void usage(void);</code></em></strong></li>
+
+  <p><code><br />
+  // Usage<br />
+  //  Instruct user on how to use this program; i.e. the commands it<br />
+  //  supports and the syntax of those commands.<br />
+  // In:<br />
+  //    none<br />
+  // Out:<br />
+  //    No Return Value<br />
+  //    effect -- output produced on standard output<br />
+  </code></p>
+  </ul>
+
+<ul><li><p><strong><em><code>bool is_vec_null(Vector *);</code></em></strong></p>
+
+<p><code><br />
+// is_vec_null:<br />
+//  Checks if the vector passed in as param NULL or not<br />
+// In:<br />
+//  Vector != NULL<br />
+// Out:<br />
+//  Return -- true if v is NULL, false otherwise<br />
+</code></p></li>
+<li><p><strong><em><code>bool print_vec(Vector *);</code></em></strong></p>
+
+<p><code><br />
+// print_vec:<br />
+//    Prints the Vector *v  provided in param<br />
+// In:<br />
+//    Vector != NULL<br />
+//    v-&gt;elements != NULL<br />
+//    v-&gt;size &gt; 0<br />
+// Out:<br />
+//    Return -- true if successful, false otherwise<br />
+//    effect -- Vector is printed on the stdin<br />
+</code></p></li>
+<li><p><strong><em><code>Vector *alloc_vec(void);</code></em></strong></p>
+
+<p><code><br />
+// alloc_vec:<br />
+//    Allocates an empty Vector<br />
+// In:<br />
+//    N/a<br /><br />
+// Out:<br />
+//    return -- Pointer to newly allocated Vector if successfull, NULL otherwise<br />
+//    effect -- A new Vector is allocted to dynamic memory space.<br />
+</code></p></li>
+<li><p><strong><em><code>void dealloc_vec(Vector *);</code></em></strong></p>
+
+<p><code><br />
+// dealloc_vec:<br />
+//    Deallocates a given Vector<br />
+// In:<br />
+//    Vector != NULL<br />
+// Out:<br />
+//    No return value<br />
+//    effect -- Vector passed through param is safely deallocated from memory space.<br />
+</code></p></li>
+<li><p><strong><em><code>Vector *extend_vec(Vector *, Elem);</code></em></strong></p>
+
+<p><code><br />
+// extend_vec:<br />
+//    Extend Vector with specified Elem value<br />
+// In:<br />
+//    Vector != NULL<br />
+//    Elem<br />
+// Out:<br />
+//    return  -- Vector including the new Elem value<br />
+//    effect -- Deallocates the given Vector and creates a new one with new Elem value added.<br />
+</code></p></li>
+<li><p><strong><em><code>Vector *scalar_plus(Vector *, Elem);</code></em></strong></p>
+
+<p><code><br />
+// scalar_plus:<br />
+//    Adds the specified Elem value to each element in the Vector<br />
+// In:<br />
+//    Vector != NULL<br />
+//    Elem<br />
+// Out:<br />
+//    return -- Vector with updated values, NULL otherwise<br />
+//    effect -- All elements in Vector get updated with new values if successfull.<br />
+</code></p></li>
+<li><p><strong><em><code>Vector *scalar_minus(Vector *, Elem);</code></em></strong></p>
+
+<p><code>
+// scalar_minus:<br />
+//    Subtracts the specified Elem value from each element in Vector<br />
+// In:<br />
+//    Vector != NULL<br />
+//    Elem<br />
+// Out:<br />
+//    return -- Vector with updated values, NULL otherwise<br />
+//    effect -- All elemtj5e.jpgments in Vector get updated with new values if successful<br />
+</code></p></li>
+<li><p><strong><em><code>Vector *scalar_mult(Vector *v, Elem)</code></em></strong></p>
+
+<p><code><br />
+// scalar_multiply:<br />
+//    Multiplies the specified Elem value from each element in Vector<br />
+// In:<br />
+//    Vector != NULL<br />
+//    Elem<br />
+// Out:<br />
+//    return -- Vector with updated values, NULL otherwise<br />
+//    effect -- All elements in Vector get updated with new values if successful.</p><br />
+
+</code><p></p></li>
+<li><p><strong><em><code>Vector *scalar_divide(Vector *, Elem)</code></em></strong></p>
+
+<p><code><br />
+// scalar_divide:<br />
+//    Divides the specified Elem value from each element in Vector<br />
+// In:<br />
+//    Vector != NULL<br />
+//    Elem<br />
+// Out:<br />
+//    return -- Vector with updated values, NULL otherwise<br />
+//    effect -- All elements in Vector get updated with new values.<br /></code></p>
+
+<p></p></li>
+<li><p><strong><em><code>int main(int,char * *)</code></em></strong></p>
+
+<p><code>
+// main:<br />
+//    Program entry point<br />
+// In:<br />
+//    argc &gt; 0 new Elem[newsize];<br />
+//    argv[0 .. argc-1] != NULL<br />
+// Out:<br />
+//    return -- EXIT_SUCCESS if program terminates normally,<br />
+//          EXIT_FAILURE otherwise<br />
+</code></p></li></ul></li>
+</ul>
