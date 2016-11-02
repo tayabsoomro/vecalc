@@ -26,7 +26,6 @@ typedef enum { INPUT, CALC } State;
 const int MAX_ELEMS = UINT16_MAX; // Value chosen because a vector can 
                                   // contain from 0 to 65535 elements.
 
-
 // A VecSize is uint16_t representing the size of the Vector
 typedef uint16_t VecSize;
 
@@ -305,11 +304,19 @@ int main(int argc, char* argv[]){
 	
     // Checking scalar_plus:
     assert(NULL != scalar_plus(v4,2.0));	
-    
+    assert(NULL == scalar_plus(NULL,0.0));
+
     assert(102.00000 == v4->elements[0]);
     assert(98.000000 == v4->elements[1]);
     assert(14.000000 == v4->elements[2]);
-    
+   
+    // Checking for -'ve values in scalar_plus 
+    assert(NULL != scalar_plus(v4,-2.0));
+
+    assert(100.000000 == v4->elements[0]);
+    assert(96.000000 == v4->elements[1]);
+    assert(12.000000 == v4->elements[2]);
+
 
     // Checking print_vec:
     // Expected output:
@@ -318,22 +325,66 @@ int main(int argc, char* argv[]){
     // ** VECTOR SIZE: 3
     //
     // ** VECTOR ELEMENTS:
-    // 1. 102.000000
-    // 2. 98.000000
-    // 3. 14.000000
+    // 1. 100.000000
+    // 2. 96.000000
+    // 3. 12.000000
     // ** PRINT VECTOR END  **
-    print_vec(v4);
+    assert(true == print_vec(v4));
+    assert(false == print_vec(NULL));
 
     // Checking scalar_minus:
-    assert(NULL != scalar_minus(v4,2.0)); 
-	
+    assert(NULL != scalar_minus(v4,2.0));
+    assert(NULL == scalar_minus(NULL,0.0));
+
+    assert(98.000000 == v4->elements[0]);
+    assert(94.000000 == v4->elements[1]);
+    assert(10.000000 == v4->elements[2]);
+	 
+    // Checking for -'ve values in scalar_minus:
+    assert(NULL != scalar_minus(v4,-4.0));
+    
+    assert(102.000000 == v4->elements[0]);
+    assert(98.000000 == v4->elements[1]);
+    assert(14.000000 == v4->elements[2]);
+
+
     // Checking scalar_multiply:
-    assert(NULL != scalar_mult(v4,2.0));
+    assert(NULL != scalar_mult(v4,1.0));
+    assert(NULL == scalar_mult(NULL,0.0));
+
+    assert(102.000000 == v4->elements[0]);
+    assert(98.000000 == v4->elements[1]);
+    assert(14.000000 == v4->elements[2]);
+    
+    // Checking for -'ve values in scalar_mult
+    assert(NULL != scalar_mult(v4,-1.0));
+
+    assert(-102.000000 == v4->elements[0]);
+    assert(-98.000000 == v4->elements[1]);
+    assert(-14.000000 == v4->elements[2]);
 
     // Checking scalar_divide:
     assert(NULL != scalar_divide(v4,2.0));
-	
+    assert(NULL == scalar_divide(NULL,0.0));
 
+    assert(-51.000000 == v4->elements[0]);
+    assert(-49.000000 == v4->elements[1]);
+    assert(-7.000000 == v4->elements[2]);
+    
+    // Checking for -'ve values in scalar_divide
+    assert( NULL != scalar_divide(v4,-1.0));
+
+    assert(51.000000 == v4->elements[0]);
+    assert(49.000000 == v4->elements[1]);
+    assert(7.000000 == v4->elements[2]);
+
+	
+    // Deallocting vector -- Unfortunately there is little that can be done from the program prespective to test that
+    // all the dynamic memory tied up by the structures pointed to by v1, v2, v3 and v4 has been freed.
+    dealloc_vec(v1);
+    dealloc_vec(v2);
+    dealloc_vec(v3);
+    dealloc_vec(v4);
 #endif // TESTING
     return EXIT_SUCCESS;
 
