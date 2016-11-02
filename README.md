@@ -3,6 +3,14 @@ _Simple. Interactive. Vector Calculator_
 
 ## Contents
 - [Introduction](#introduction)
+ + [Author Info](#author)
+ + [Program](#program)
+- [Compilation](#compilation)
+- [Project Progress](#project-progress)
+- [Code Structure](#code-structure)
+ + [Data Types](#datatypes)
+ + [Constants](#contants)
+ + [Functions](#functions)
 
 ## Introduction
 
