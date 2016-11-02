@@ -11,6 +11,11 @@ Student #: 11199539 | NSID: mts066
 The vecalc program operates on a retained vector of (single-precision) floating-point values. It alternates between two states, an input state and a calculation (or calculator) state. The program begins execution in the former state, wherein it creates an empty vector, prompts the user for a number of elements in the vector, and builds up a vector with elements obtained one-at-a-time from the user. The program then switches to calculation state. In calculation state vecalc accepts operations and commands from the user and executes them. After most commands the program remains in calculation state. On a "clear" command ("c"), the program frees up the memory used by the current vector (i.e. deletes that exiting vector) and switches back to input state.
 
 
+## Compilation
+ The program can be compiled through following commands.
+  - `g++ -Wall -Wextra -o vecalc vecalc.cc` - Outputs executable file named vecalc.
+  - `g++ -Wall -Wextra -DTESTING -o vecalc.testing vecalc.cc` - Outputs executable file named vecalc.testing which runs the tests
+
 ## Project Progress
 
  - Implementation
