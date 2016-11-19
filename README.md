@@ -1,4 +1,4 @@
-# veCalc
+# veCalc - Assignment 3
 _Simple. Interactive. Vector Calculator_
 
 ## Contents
@@ -40,26 +40,26 @@ The vecalc program operates on a retained vector of (single-precision) floating-
         + _`Vector *scalar_minus(Vector *, Elem)`_
         + _`Vector *scalar_mult(Vector *, Elem)`_
         + _`Vector *scalar_div(Vector *, Elem)`_
-        
+
 ## Code Structure
 
 - ### Datatypes
   + **Elem** - Represents an element and is of type `float`
-  
+
     ***Example Usage***
 
-      
+
   + **VecSize** - Represents the size of a Vector
-  
+
     ***Example Usage***
     ```
     // for(VecSize i = 0 ...){
     //   ...
     // }
     ```
-    
+
   + **State** - Representing program states `INPUT` and `CALC`
-  
+
     ***Example Usage***
     ```
     // ... (State s, ...){
@@ -71,7 +71,7 @@ The vecalc program operates on a retained vector of (single-precision) floating-
     // }
     ```
   + **Vector** - Represents a structured type of vectors
-  
+
     ***Example Usage***
     ```
     // ... (Vector *v, uint8_t index, ...) {
@@ -84,7 +84,7 @@ The vecalc program operates on a retained vector of (single-precision) floating-
 
 - ### Functions
   + ***`void usage(void);`***
-  
+
     ```
     // Usage
     //  Instruct user on how to use this program; i.e. the commands it
@@ -95,9 +95,9 @@ The vecalc program operates on a retained vector of (single-precision) floating-
     //    No Return Value
     //    effect -- output produced on standard output
     ```
-   
+
    + ***`bool is_vec_null(Vector *);`***
-   
+
       ```
       // is_vec_null:
       //  Checks if the vector passed in as param NULL or not
@@ -106,9 +106,9 @@ The vecalc program operates on a retained vector of (single-precision) floating-
       // Out:
       //  Return -- true if v is NULL, false otherwise
       ```
-    
+
    + ***`bool print_vec(Vector *);`***
-   
+
       ```
       // print_vec:
       // 	Prints the Vector *v  provided in param
@@ -120,9 +120,9 @@ The vecalc program operates on a retained vector of (single-precision) floating-
       // 	Return -- true if successful, false otherwise
       // 	effect -- Vector is printed on the stdin
       ```
-    
+
    + ***`Vector *alloc_vec(void);`***
-   
+
       ```
       // alloc_vec:
       // 	Allocates an empty Vector
@@ -132,9 +132,9 @@ The vecalc program operates on a retained vector of (single-precision) floating-
       // 	return -- Pointer to newly allocated Vector if successfull, NULL otherwise
       // 	effect -- A new Vector is allocted to dynamic memory space.
       ```
-    
+
    + ***`void dealloc_vec(Vector *);`***
-   
+
       ```
       // dealloc_vec:
       // 	Deallocates a given Vector
@@ -144,9 +144,9 @@ The vecalc program operates on a retained vector of (single-precision) floating-
       // 	No return value
       // 	effect -- Vector passed through param is safely deallocated from memory space.
       ```
-    
+
    + ***`Vector *extend_vec(Vector *, Elem);`***
-    
+
       ```
       // extend_vec:
       // 	Extend Vector with specified Elem value
@@ -157,9 +157,9 @@ The vecalc program operates on a retained vector of (single-precision) floating-
       // 	return  -- Vector including the new Elem value
       //	effect -- Deallocates the given Vector and creates a new one with new Elem value added.
       ```
-    
+
    + ***`Vector *scalar_plus(Vector *, Elem);`***
-   
+
       ```
       // scalar_plus:
       // 	Adds the specified Elem value to each element in the Vector
@@ -170,10 +170,10 @@ The vecalc program operates on a retained vector of (single-precision) floating-
       // 	return -- Vector with updated values, NULL otherwise
       // 	effect -- All elements in Vector get updated with new values if successfull.
       ```
-    
+
    + ***`Vector *scalar_minus(Vector *, Elem);`***
-   
-      ``` 
+
+      ```
       // scalar_minus:
       // 	Subtracts the specified Elem value from each element in Vector
       // In:
@@ -185,9 +185,9 @@ The vecalc program operates on a retained vector of (single-precision) floating-
       // 	return -- Vector with updated values, NULL otherwise
       // 	effect -- All elemtj5e.jpgments in Vector get updated with new values if successful
       ```
-    
+
     + ***`Vector *scalar_mult(Vector *v, Elem)`***
-    
+
       ```
       // scalar_multiply:
       // 	Multiplies the specified Elem value from each element in Vector
@@ -200,7 +200,7 @@ The vecalc program operates on a retained vector of (single-precision) floating-
 
       ```
    + ***`Vector *scalar_divide(Vector *, Elem)`***
-    
+
       ```
       // scalar_divide:
       // 	Divides the specified Elem value from each element in Vector
@@ -212,9 +212,9 @@ The vecalc program operates on a retained vector of (single-precision) floating-
       // 	effect -- All elements in Vector get updated with new values.
 
       ```
-    
+
    + ***`int main(int,char * *)`***
-    
+
       ```
       // main:
       // 	Program entry point
