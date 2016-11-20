@@ -1,0 +1,12 @@
+// Author: Muhammad Tayab Soomro
+// Student #: 11199539
+// NSID: mts066
+// Email: tayab.soomro@usask.ca
+
+#ifndef _VECTOR_H
+#define _VECTOR_H
+
+// An Elem is single precision floating-point value
+typedef float Elem;
+
+#endif _VECTOR_H
