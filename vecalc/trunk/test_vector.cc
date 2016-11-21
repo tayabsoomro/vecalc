@@ -1,0 +1,22 @@
+// Author: Muhammad Tayab Soomro
+// Student #: 11199539
+// NSID: mts066
+// Email: tayab.soomro@usask.ca
+
+// Unit tests for functions in vector.cc
+
+
+#include <assert.h> // for asset()
+#include <stdlib.h> // for EXIT_SUCCESS
+
+// main:
+//    Program entry point
+// In:
+//    argc > 0
+//    argv[0 .. argc-1] != NULL
+// Out:
+//    return  -- EXIT_SUCCESS if program terminates successfully
+//            -- EXIT_FAILURE otherwise
+int main(int, char**){
+  return EXIT_SUCCESS;
+}
