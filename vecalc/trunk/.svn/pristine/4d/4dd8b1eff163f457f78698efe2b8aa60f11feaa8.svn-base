@@ -40,9 +40,6 @@ void test_alloc_vec(){
   }
 }
 
-
-
-
 // main:
 //    Program entry point
 // In:

@@ -36,10 +36,3 @@ void dealloc_vec(Vector *v){
 Vector *extend_vec(Vector *v, Elem value){
   return NULL;
 }
-
-// function print_vec(Vector *v)
-//   see description in vector.h
-
-bool print_vec(Vector* v){
-  return false;
-}
