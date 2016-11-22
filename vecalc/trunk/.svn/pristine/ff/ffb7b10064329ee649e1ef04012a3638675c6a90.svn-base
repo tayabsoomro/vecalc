@@ -40,13 +40,6 @@ void test_alloc_vec(){
   }
 }
 
-// test_dealloc_vec
-//   Unit tests for dealloc_vec
-void test_dealloc_vec(){
-  puts("I am taking a leap of faith that this works.\n");
-  puts("Not any affirmitive way to test deallocation");
-}
-
 // test_extend_vec
 //   Unit tests for extend_vec
 void test_extend_vec(){
@@ -68,7 +61,7 @@ void test_extend_vec(){
   // Testing extend_vec with large values
   for(int i = 0; i < numVectors; i++){
     Vector *v[i] = alloc_vec();
-    Vector *v[i+1] = extend_vec(v[i],i+1000);
+    v[i+1] = extend_vec(v[i],i+1000);
     assert(NULL != v[i+1]);
     assert(i+1 == v[i+1]->size);
     asset(i+1000 == v[i+1]->elemnts[i]);
@@ -102,10 +95,5 @@ void test_extend_vec(){
 //    return  -- EXIT_SUCCESS if program terminates successfully
 //            -- EXIT_FAILURE otherwise
 int main(int, char**){
-
-  // Testing the functions
-  test_alloc_vec();
-  test_extend_vec();
-  test_print_vec();
   return EXIT_SUCCESS;
 }

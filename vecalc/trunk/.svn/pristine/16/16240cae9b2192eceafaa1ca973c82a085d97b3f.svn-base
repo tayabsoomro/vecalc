@@ -40,13 +40,6 @@ void test_alloc_vec(){
   }
 }
 
-// test_dealloc_vec
-//   Unit tests for dealloc_vec
-void test_dealloc_vec(){
-  puts("I am taking a leap of faith that this works.\n");
-  puts("Not any affirmitive way to test deallocation");
-}
-
 // test_extend_vec
 //   Unit tests for extend_vec
 void test_extend_vec(){
@@ -102,10 +95,5 @@ void test_extend_vec(){
 //    return  -- EXIT_SUCCESS if program terminates successfully
 //            -- EXIT_FAILURE otherwise
 int main(int, char**){
-
-  // Testing the functions
-  test_alloc_vec();
-  test_extend_vec();
-  test_print_vec();
   return EXIT_SUCCESS;
 }
